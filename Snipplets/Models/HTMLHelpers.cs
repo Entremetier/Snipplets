@@ -21,7 +21,7 @@ namespace Snipplets.Models
 
         public bool CheckBox3 { get; set; }
 
-        public radiotype RadioButton { get; set; }
+        public Gender RadioButton { get; set; }
 
         public dropdowntype DropDown1 { get; set; }
 
@@ -51,5 +51,10 @@ namespace Snipplets.Models
         FirstItem,
         SecondItem,
         ThirdItem
+    }
+
+    public enum Gender
+    {
+        female = 1, male
     }
 }
