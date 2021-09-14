@@ -53,6 +53,16 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.CheckBox3, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.CheckBox3)
+                @Html.ValidationMessageFor(model => model.CheckBox3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-control" } })
@@ -87,9 +97,9 @@
         <div class="col-md-10">
             @Html.ListBoxFor(model => model.ListBox, new SelectList(new List<string>() { "List Item 1", "List Item 2", "List Item 3" }), new { @class = "form-control" })
 
-    
-    @Html.ValidationMessageFor(model => model.ListBox, "", new { @class = "text-danger" })
-</div>
+
+            @Html.ValidationMessageFor(model => model.ListBox, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="form-group">

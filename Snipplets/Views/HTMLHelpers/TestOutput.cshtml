@@ -43,6 +43,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CheckBox3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckBox3)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Hidden)
         </dt>
 
@@ -81,7 +89,7 @@
         <dd>
 
             @Html.ListBoxFor(model => model.ListBox, new SelectList(Snipplets.Controllers.HTMLHelpersController.LBTransfer, new { @class = "form-control" }))
-    
+
         </dd>
 
         <dt>

@@ -19,6 +19,8 @@ namespace Snipplets.Models
 
         public bool CheckBox2 { get; set; }
 
+        public bool CheckBox3 { get; set; }
+
         public radiotype RadioButton { get; set; }
 
         public dropdowntype DropDown1 { get; set; }
