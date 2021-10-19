@@ -32,7 +32,15 @@ namespace Snipplets.Controllers
         public ActionResult PartialDetails()
         {
             TempData["Anzahl"] = EmployeeListe.Count();
+            TempData["DateTime"] = DateTime.Now.Date.ToShortDateString();
+
             return View(EmployeeListe);
+        }
+
+        // Die View für den PartialView für TempData["DateTime"], wird aufgerufen wenn PartialDetails ↑↑↑ aufgerufen wird
+        public ActionResult DateTimeDetails()
+        {
+            return View();
         }
 
         // GET: Employee/PartialDetails

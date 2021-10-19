@@ -10,42 +10,111 @@
 }
 
 <div id="ourcontainer">
-    <img src="@imagepath" style="margin-left:100px;" id="graphic" alt="Our Graphic ... ">
+    <img src="@imagepath" style="margin-left : 100px" id="graphic" alt="Our Graphic ... ">
 </div>
-
+<div id="sec1">
+</div>
+<p><button id="button3" onclick="aufgabe3()">Aufgabe 3</button></p>
 <hr />
 <p> 1) Now show me the dimensions of the window, the screen and the div element "ourcontainer" </p>
-<p> 2) Display the URL with JS  </p>
-<p> 3) Now try to create a button, which brings you BACK to the last page.  </p>
-<p> 4) Try to read the cookie with JS, which has been stored in MVC right in the action. Indicate the data.   </p>
-<p> 5) Now implement the JS code, to move the picture left or right by 5 px, when pressing the button.  </p>
+<p> 2) Display the URL with JS </p>
+<p> 3) Now try to create a button, which brings you BACK to the last page. </p>
+<p> 4) Try to read the cookie with JS, which has been stored in MVC right in the action. Indicate the data. </p>
+<p> 5) Now implement the JS code, to move the picture left or right by 5 px, when pressing the button. </p>
 <p><button onclick="myMove(1)" class="btn btn-default">Move picture left</button> <button onclick="myMove(2)" class="btn btn-default">Move picture right</button> </p>
-<p> 6) Enter some text and show the number of characters as text beneath, during typing.  </p>
-<p> <input type="text" onkeypress="myEnteredText()" class="form-control" id="mytext"> </p>
+<p> 6) Enter some text and show the number of characters as text beneath, during typing. </p>
+<p> <input type="text" onkeyup="myEnteredText()" class="form-control" id="mytext"> </p>
+<p id="sol6"></p>
 <p> 7) You have got a JSON file in JSONExamples/countries.json. Read it with JS AJAX and write the country names like "Afghanistan, Albania, ..." </p>
 <div id="countrieshere"></div>
-<p> 8) Whenever you type a country here, show only the countries, which match with the div and filter them  </p>
-<p> <input type="text" onkeypress="myCountries()" class="form-control" id="mycounties"> </p>
+<p> 8) Whenever you type a country here, show only the countries, which match with the div and filter them </p>
+<p> <input type="text" onkeyup="sortDataInput()" class="form-control" id="mycounties"> </p>
 
-<hr /> 
+<hr />
 
 <p> Have fun ;) </p>
 
 <script>
-    function myMove(navigator)
-    {
-        var elem = document.getElementById("graphic");
+
+    let data = readTextFile("../JSONExample/countries.json", function (text) {
+        data = JSON.parse(text);
+        console.log(data);
+        return data;
+    });
+
+    function readTextFile(file, callback) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                callback(rawFile.responseText);
+            }
+        }
+        rawFile.send(null);
+    }
+    //usage: Create Data here for call onRelease on section 8
+
+    function sortDataInput() {
+        let needle = document.getElementById("mycounties").value;
+        let result = [];
+        let ausgabe = "";
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name.includes(needle)) {
+                result.push(data[i]);
+            }
+        }
+        document.getElementById("countrieshere").innerHTML = "";
+        result.forEach(element => document.getElementById("countrieshere").innerHTML += `Name:${element.name} Code:${element.code}<BR/>`);
+    }
+
+    function myMove(navigator) {
+
+        let temp = document.getElementById("graphic").style.marginLeft;
+        let elem = document.getElementById("graphic");
+        let zwischen = parseInt(temp.substring(0, temp.length - 2));
 
         if (navigator == 1) {
 
+            elem.style.marginLeft = zwischen - 5 + "px";
             // MOVE THE PICTURE LEFT BY 5 PX
             console.log("picture left pressed");
 
         } else {
-
+            elem.style.marginLeft = zwischen + 5 + "px";
             // MOVE THE PICTURE RIGHT BY 5 PX
             console.log("picture right pressed");
         }
-        
+
     }
+
+    function aufgabe1() {
+        let width = document.getElementById('ourcontainer').offsetWidth;
+        let height = document.getElementById('ourcontainer').offsetHeight;
+        let ausgabe = `Fenster = Breite: ${window.innerWidth} Höhe: ${window.innerHeight}
+        Bild= Breite:${width} Höhe: ${height}`;
+        document.getElementById("sec1").innerHTML += ausgabe;
+    };
+
+    function aufgabe2() {
+        document.getElementById("sec1").innerHTML += "<br/>" + `${document.documentURI}`;
+    };
+
+    function aufgabe3() {
+        window.location.href = document.referrer;
+    }
+    function aufgabe4() {
+        let cookies = "{" + document.cookie.split(';') + "}S";
+
+        document.getElementById("sec1").innerHTML += "<br/>" + `${cookies}`;
+    }
+
+    function myEnteredText() {
+        let lengthOfInput = document.getElementById("mytext").value.length;
+        document.getElementById("sol6").innerHTML = lengthOfInput;
+    }
+    aufgabe1();
+    aufgabe2();
+    aufgabe4();
+
 </script>

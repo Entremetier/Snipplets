@@ -207,6 +207,7 @@
     <Content Include="Views\JSONBitcoin\BuySell.cshtml" />
     <Content Include="Views\Javascript\Index.cshtml" />
     <Content Include="Views\Javascript\UeberUns.cshtml" />
+    <Content Include="Views\Employee\DateTimeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
